@@ -11,7 +11,7 @@ import axios from 'axios';
 
 export const loginUser = (userData, history) => (dispatch) => {
 	dispatch({ type: LOADING_UI });
-	axios
+	return axios
 		.post('/login', userData)
 		.then((res) => {
 			setAuthorizationHeader(res.data.token);
@@ -26,7 +26,7 @@ export const loginUser = (userData, history) => (dispatch) => {
 
 export const getUserData = () => (dispatch) => {
 	dispatch({ type: LOADING_USER });
-	axios
+	return axios
 		.get('/user')
 		.then((res) => {
 			dispatch({ type: SET_USER, payload: res.data });
@@ -36,7 +36,7 @@ export const getUserData = () => (dispatch) => {
 
 export const signupUser = (newUserData, history) => (dispatch) => {
 	dispatch({ type: LOADING_UI });
-	axios
+	return axios
 		.post('/signup', newUserData)
 		.then((res) => {
 			setAuthorizationHeader(res.data.token);
@@ -58,7 +58,7 @@ export const logoutUser = () => (dispatch) => {
 
 export const uploadImage = (formData) => (dispatch) => {
 	dispatch({ type: LOADING_USER });
-	axios
+	return axios
 		.post('/user/image', formData)
 		.then((res) => {
 			dispatch(getUserData());
@@ -68,7 +68,7 @@ export const uploadImage = (formData) => (dispatch) => {
 
 export const editUserDetails = (userDetails) => (dispatch) => {
 	dispatch({ type: LOADING_USER });
-	axios
+	return axios
 		.post('/user', userDetails)
 		.then(() => {
 			dispatch(getUserData());
@@ -79,7 +79,7 @@ export const editUserDetails = (userDetails) => (dispatch) => {
 // Mark notifications read
 
 export const markNotificationsRead = (notificationsIds) => (dispatch) => {
-	axios
+	return axios
 		.post('/notifications', notificationsIds)
 		.then((res) => {
 			dispatch({ type: MARK_NOTIFICATIONS_READ });

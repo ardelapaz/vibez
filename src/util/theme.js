@@ -57,7 +57,8 @@ export default {
 		},
 		navAvatar: {
 			height: 30,
-			width: 30
+			width: 30,
+			marginRight: 5
 		},
 		// Notifications
 		menu: {

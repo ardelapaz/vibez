@@ -18,7 +18,7 @@ import axios from 'axios';
 
 export const getWaves = () => (dispatch) => {
 	dispatch({ type: LOADING_DATA });
-	axios
+	return axios
 		.get('/waves')
 		.then((res) => {
 			dispatch({ type: SET_WAVES, payload: res.data });
@@ -32,7 +32,7 @@ export const getWaves = () => (dispatch) => {
 
 export const getWave = (waveId) => (dispatch) => {
 	dispatch({ type: LOADING_UI });
-	axios
+	return axios
 		.get(`/wave/${waveId}`)
 		.then((res) => {
 			dispatch({ type: SET_WAVE, payload: res.data });
@@ -45,7 +45,7 @@ export const getWave = (waveId) => (dispatch) => {
 
 export const postWave = (newWave) => (dispatch) => {
 	dispatch({ type: LOADING_UI });
-	axios
+	return axios
 		.post('/wave', newWave)
 		.then((res) => {
 			dispatch({ type: POST_WAVE, payload: res.data.resWave });
@@ -59,7 +59,7 @@ export const postWave = (newWave) => (dispatch) => {
 // Favorite wave
 
 export const upvoteWave = (waveId) => (dispatch) => {
-	axios
+	return axios
 		.get(`/wave/${waveId}/upvote`)
 		.then((res) => {
 			dispatch({ type: UPVOTE_WAVE, payload: res.data });
@@ -70,7 +70,7 @@ export const upvoteWave = (waveId) => (dispatch) => {
 // Unfavorite wave
 
 export const unupvoteWave = (waveId) => (dispatch) => {
-	axios
+	return axios
 		.get(`/wave/${waveId}/unupvote`)
 		.then((res) => {
 			dispatch({ type: UNUPVOTE_WAVE, payload: res.data });
@@ -81,7 +81,7 @@ export const unupvoteWave = (waveId) => (dispatch) => {
 // Delete a wave
 
 export const deleteWave = (waveId) => (dispatch) => {
-	axios
+	return axios
 		.delete(`/wave/${waveId}`)
 		.then(() => {
 			dispatch({ type: DELETE_WAVE, payload: waveId });
@@ -91,7 +91,7 @@ export const deleteWave = (waveId) => (dispatch) => {
 
 // Post a comment
 export const postComment = (waveId, commentData) => (dispatch) => {
-	axios
+	return axios
 		.post(`/wave/${waveId}/comment`, commentData)
 		.then((res) => {
 			dispatch({ type: POST_COMMENT, payload: res.data });
@@ -106,7 +106,7 @@ export const postComment = (waveId, commentData) => (dispatch) => {
 
 export const getUserProfile = (userHandle) => (dispatch) => {
 	dispatch({ type: LOADING_DATA });
-	axios
+	return axios
 		.get(`/user/${userHandle}`)
 		.then((res) => {
 			dispatch({ type: SET_WAVES, payload: res.data.waves });

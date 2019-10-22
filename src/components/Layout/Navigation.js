@@ -87,13 +87,12 @@ export class Navigation extends Component {
 						)}
 						{authenticated && <Notifications />}
 						{authenticated && (
-							<Button
-								component={Link}
-								to={`/users/${handle}`}
-								startIcon={
-									<Avatar src={imageUrl} className={classes.navAvatar} />
-								}
-							>
+							<Button component={Link} to={`/users/${handle}`}>
+								<Avatar
+									src={imageUrl}
+									alt='test'
+									className={classes.navAvatar}
+								/>
 								<Typography
 									variant='button'
 									color='textPrimary'

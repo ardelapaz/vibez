@@ -11,8 +11,8 @@ import { SET_AUTHENTICATED } from './redux/types';
 import { logoutUser, getUserData } from './redux/actions/userActions';
 
 // MUI
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import MuiThemeProvider from '../node_modules/@material-ui/core/styles/MuiThemeProvider';
+import createMuiTheme from '../node_modules/@material-ui/core/styles/createMuiTheme';
 import themeFile from './util/theme';
 
 // Pages
