@@ -14,6 +14,8 @@ import ProfileSkeleton from '../util/ProfileSkeleton';
 import { connect } from 'react-redux';
 import { getUserProfile } from '../redux/actions/dataActions';
 
+const baseUrl = "https://us-central1-vibe-32481.cloudfunctions.net/api";
+
 export class user extends Component {
 	state = {
 		profile: null,
@@ -26,7 +28,7 @@ export class user extends Component {
 		if (waveId) this.setState({ waveIdParam: waveId });
 		this.props.getUserProfile(handle);
 		axios
-			.get(`/user/${handle}`)
+			.get(`${baseUrl}/user/${handle}`)
 			.then((res) => {
 				this.setState({ profile: res.data.user });
 			})
@@ -45,14 +47,14 @@ export class user extends Component {
 		) : !waveIdParam ? (
 			waves.map((wave) => <Wave key={wave.waveId} wave={wave} />)
 		) : (
-			waves.map((wave) => {
-				if (wave.waveId !== waveIdParam) {
-					return <Wave key={wave.waveId} wave={wave} />;
-				} else {
-					return <Wave key={wave.waveId} wave={wave} openDialog />;
-				}
-			})
-		);
+						waves.map((wave) => {
+							if (wave.waveId !== waveIdParam) {
+								return <Wave key={wave.waveId} wave={wave} />;
+							} else {
+								return <Wave key={wave.waveId} wave={wave} openDialog />;
+							}
+						})
+					);
 		return (
 			<div className='container'>
 				<Grid container spacing={5}>
@@ -60,8 +62,8 @@ export class user extends Component {
 						{this.state.profile ? (
 							<StaticProfile profile={this.state.profile} />
 						) : (
-							<ProfileSkeleton />
-						)}
+								<ProfileSkeleton />
+							)}
 					</Grid>
 					<Grid item sm={6} xs={12}>
 						{wavesMarkup}

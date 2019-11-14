@@ -14,12 +14,15 @@ import {
 } from '../types';
 import axios from 'axios';
 
+const baseUrl = "https://us-central1-vibe-32481.cloudfunctions.net/api";
+
+
 // Get all waves
 
 export const getWaves = () => (dispatch) => {
 	dispatch({ type: LOADING_DATA });
 	return axios
-		.get('/waves')
+		.get(`${baseUrl}/waves`)
 		.then((res) => {
 			dispatch({ type: SET_WAVES, payload: res.data });
 		})
@@ -33,7 +36,7 @@ export const getWaves = () => (dispatch) => {
 export const getWave = (waveId) => (dispatch) => {
 	dispatch({ type: LOADING_UI });
 	return axios
-		.get(`/wave/${waveId}`)
+		.get(`${baseUrl}/wave/${waveId}`)
 		.then((res) => {
 			dispatch({ type: SET_WAVE, payload: res.data });
 			dispatch({ type: STOP_LOADING_UI });
@@ -46,7 +49,7 @@ export const getWave = (waveId) => (dispatch) => {
 export const postWave = (newWave) => (dispatch) => {
 	dispatch({ type: LOADING_UI });
 	return axios
-		.post('/wave', newWave)
+		.post(`${baseUrl}/wave`, newWave)
 		.then((res) => {
 			dispatch({ type: POST_WAVE, payload: res.data.resWave });
 			dispatch(clearErrors());
@@ -60,7 +63,7 @@ export const postWave = (newWave) => (dispatch) => {
 
 export const upvoteWave = (waveId) => (dispatch) => {
 	return axios
-		.get(`/wave/${waveId}/upvote`)
+		.get(`${baseUrl}/wave/${waveId}/upvote`)
 		.then((res) => {
 			dispatch({ type: UPVOTE_WAVE, payload: res.data });
 		})
@@ -71,7 +74,7 @@ export const upvoteWave = (waveId) => (dispatch) => {
 
 export const unupvoteWave = (waveId) => (dispatch) => {
 	return axios
-		.get(`/wave/${waveId}/unupvote`)
+		.get(`${baseUrl}/wave/${waveId}/unupvote`)
 		.then((res) => {
 			dispatch({ type: UNUPVOTE_WAVE, payload: res.data });
 		})
@@ -82,7 +85,7 @@ export const unupvoteWave = (waveId) => (dispatch) => {
 
 export const deleteWave = (waveId) => (dispatch) => {
 	return axios
-		.delete(`/wave/${waveId}`)
+		.delete(`${baseUrl}/wave/${waveId}`)
 		.then(() => {
 			dispatch({ type: DELETE_WAVE, payload: waveId });
 		})
@@ -92,7 +95,7 @@ export const deleteWave = (waveId) => (dispatch) => {
 // Post a comment
 export const postComment = (waveId, commentData) => (dispatch) => {
 	return axios
-		.post(`/wave/${waveId}/comment`, commentData)
+		.post(`${baseUrl}/wave/${waveId}/comment`, commentData)
 		.then((res) => {
 			dispatch({ type: POST_COMMENT, payload: res.data });
 			dispatch(clearErrors());
@@ -107,7 +110,7 @@ export const postComment = (waveId, commentData) => (dispatch) => {
 export const getUserProfile = (userHandle) => (dispatch) => {
 	dispatch({ type: LOADING_DATA });
 	return axios
-		.get(`/user/${userHandle}`)
+		.get(`${baseUrl}/user/${userHandle}`)
 		.then((res) => {
 			dispatch({ type: SET_WAVES, payload: res.data.waves });
 		})

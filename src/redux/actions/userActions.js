@@ -9,10 +9,13 @@ import {
 } from '../types';
 import axios from 'axios';
 
+const baseUrl = "https://us-central1-vibe-32481.cloudfunctions.net/api";
+
+
 export const loginUser = (userData, history) => (dispatch) => {
 	dispatch({ type: LOADING_UI });
 	return axios
-		.post('/login', userData)
+		.post(`${baseUrl}/login`, userData)
 		.then((res) => {
 			setAuthorizationHeader(res.data.token);
 			dispatch(getUserData());
@@ -27,7 +30,7 @@ export const loginUser = (userData, history) => (dispatch) => {
 export const getUserData = () => (dispatch) => {
 	dispatch({ type: LOADING_USER });
 	return axios
-		.get('/user')
+		.get(`${baseUrl}/user`)
 		.then((res) => {
 			dispatch({ type: SET_USER, payload: res.data });
 		})
@@ -37,7 +40,7 @@ export const getUserData = () => (dispatch) => {
 export const signupUser = (newUserData, history) => (dispatch) => {
 	dispatch({ type: LOADING_UI });
 	return axios
-		.post('/signup', newUserData)
+		.post(`${baseUrl}/signup`, newUserData)
 		.then((res) => {
 			setAuthorizationHeader(res.data.token);
 			dispatch(getUserData());
@@ -59,7 +62,7 @@ export const logoutUser = () => (dispatch) => {
 export const uploadImage = (formData) => (dispatch) => {
 	dispatch({ type: LOADING_USER });
 	return axios
-		.post('/user/image', formData)
+		.post(`${baseUrl}/user/image`, formData)
 		.then((res) => {
 			dispatch(getUserData());
 		})
@@ -69,7 +72,7 @@ export const uploadImage = (formData) => (dispatch) => {
 export const editUserDetails = (userDetails) => (dispatch) => {
 	dispatch({ type: LOADING_USER });
 	return axios
-		.post('/user', userDetails)
+		.post(`${baseUrl}/user`, userDetails)
 		.then(() => {
 			dispatch(getUserData());
 		})
@@ -80,7 +83,7 @@ export const editUserDetails = (userDetails) => (dispatch) => {
 
 export const markNotificationsRead = (notificationsIds) => (dispatch) => {
 	return axios
-		.post('/notifications', notificationsIds)
+		.post(`${baseUrl}/notifications`, notificationsIds)
 		.then((res) => {
 			dispatch({ type: MARK_NOTIFICATIONS_READ });
 		})
