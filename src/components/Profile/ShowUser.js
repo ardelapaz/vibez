@@ -29,7 +29,6 @@ import {
 
 // Redux
 import { connect } from 'react-redux';
-import { uploadImage } from '../../redux/actions/userActions';
 
 const styles = (theme) => ({
 	...theme.spread
@@ -38,16 +37,6 @@ const styles = (theme) => ({
 class ShowUser extends Component {
 	state = {
 		expanded: false
-	};
-	handleImageChange = (event) => {
-		const image = event.target.files[0];
-		const formData = new FormData();
-		formData.append('image', image, image.name);
-		this.props.uploadImage(formData);
-	};
-	handleEditPicture = () => {
-		const fileInput = document.getElementById('imageInput');
-		fileInput.click();
 	};
 	handleLogout = () => {
 		this.props.logoutUser();
@@ -142,33 +131,33 @@ class ShowUser extends Component {
 					</ExpansionPanelDetails>
 				</ExpansionPanel>
 			) : (
-				<Paper className={classes.paper}>
-					<Typography variant='body2' align='center'>
-						No profile found
+					<Paper className={classes.paper}>
+						<Typography variant='body2' align='center'>
+							No profile found
 					</Typography>
-					<div className={classes.profileLoginButtons}>
-						<Button
-							variant='contained'
-							color='primary'
-							component={Link}
-							to='/login'
-						>
-							Login
+						<div className={classes.profileLoginButtons}>
+							<Button
+								variant='contained'
+								color='primary'
+								component={Link}
+								to='/login'
+							>
+								Login
 						</Button>
-						<Button
-							variant='contained'
-							color='secondary'
-							component={Link}
-							to='/signup'
-						>
-							Signup
+							<Button
+								variant='contained'
+								color='secondary'
+								component={Link}
+								to='/signup'
+							>
+								Signup
 						</Button>
-					</div>
-				</Paper>
-			)
+						</div>
+					</Paper>
+				)
 		) : (
-			<ProfileSkeleton />
-		);
+				<ProfileSkeleton />
+			);
 		return profileMarkup;
 	}
 }
@@ -177,9 +166,7 @@ const mapStateToProps = (state) => ({
 	user: state.user
 });
 
-const mapActionsToProps = { uploadImage };
 
 export default connect(
 	mapStateToProps,
-	mapActionsToProps
 )(withStyles(styles)(ShowUser));

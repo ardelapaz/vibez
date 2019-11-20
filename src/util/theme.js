@@ -109,6 +109,11 @@ export default {
 			}
 		},
 		// Edit Profile
+		button: {
+			position: 'absolute',
+			top: '40%',
+			left: '60%'
+		},
 
 		// Waves and comments
 		card: {
