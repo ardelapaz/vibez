@@ -4,6 +4,8 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // Redux
 import { connect } from 'react-redux';
 import { editUserDetails } from '../../redux/actions/userActions';
+import { uploadImage } from '../../redux/actions/userActions';
+
 
 // MUI
 import {
@@ -12,7 +14,8 @@ import {
 	Dialog,
 	DialogActions,
 	DialogContent,
-	DialogTitle
+	DialogTitle,
+	Avatar
 } from '@material-ui/core';
 
 // Icons
@@ -45,6 +48,16 @@ class EditDetails extends Component {
 		const { credentials } = this.props;
 		this.mapUserDetailsToState(credentials);
 	}
+	handleImageChange = (event) => {
+		const image = event.target.files[0];
+		const formData = new FormData();
+		formData.append('image', image, image.name);
+		this.props.uploadImage(formData);
+	};
+	handleEditPicture = () => {
+		const fileInput = document.getElementById('imageInput');
+		fileInput.click();
+	};
 	handleOpen = () => {
 		this.setState({ open: true });
 		this.mapUserDetailsToState(this.props.credentials);
@@ -66,7 +79,7 @@ class EditDetails extends Component {
 	};
 
 	render() {
-		const { classes } = this.props;
+		const { classes, credentials } = this.props;
 		return (
 			<Fragment>
 				<TipIconButton tip='Edit profile details' onClick={this.handleOpen}>
@@ -80,6 +93,24 @@ class EditDetails extends Component {
 				>
 					<DialogTitle>Edit details</DialogTitle>
 					<DialogContent>
+						<Avatar
+							alt='User image'
+							src={credentials.imageUrl ? credentials.imageUrl : null}
+							className={classes.profileAvatar}
+						/>
+						<input
+							type="file"
+							id="imageInput"
+							hidden="hidden"
+							onChange={this.handleImageChange}
+						/>
+						<TipIconButton
+							tip="Edit profile picture"
+							onClick={this.handleEditPicture}
+							btnClassName={classes.button}
+						>
+							<EditIcon color="secondary" />
+						</TipIconButton>
 						<form>
 							<TextField
 								name='bio'
@@ -130,10 +161,14 @@ class EditDetails extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	credentials: state.user.credentials
+	credentials: state.user.credentials,
+	user: state.user
 });
+
+const mapActionsToProps = { uploadImage, editUserDetails };
+
 
 export default connect(
 	mapStateToProps,
-	{ editUserDetails }
+	mapActionsToProps
 )(withStyles(styles)(EditDetails));
