@@ -38,9 +38,6 @@ class ShowUser extends Component {
 	state = {
 		expanded: false
 	};
-	handleLogout = () => {
-		this.props.logoutUser();
-	};
 	expandedButton = () => {
 		const expand = this.state.expanded;
 		this.setState({ expanded: !expand });
