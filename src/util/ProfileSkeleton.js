@@ -19,12 +19,12 @@ const ProfileSkeleton = (props) => {
 	return (
 		<Paper className={classes.paper}>
 			<div className={classes.profileDetails}>
-				<Avatar alt='User image' src={NoImg} className={classes.mainProfile} />
+				<Avatar alt='User image' src={NoImg} className={classes.profileAvatar} />
 				<hr className={classes.invisibleSeparator} />
 				<div className={classes.profileDetails}>
 					<div className={classes.handle} />
+					<div className={classes.handle} />
 					<hr className={classes.invisibleSeparator} />
-					<div className={classes.fullLine} />
 					<div className={classes.fullLine} />
 					<div className={classes.fullLine} />
 				</div>
