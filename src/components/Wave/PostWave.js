@@ -16,6 +16,10 @@ import {
 import { connect } from 'react-redux';
 import { postWave } from '../../redux/actions/dataActions';
 
+// Util
+import NoImg from '../../images/no-img.png';
+
+
 const styles = (theme) => ({
 	...theme.spread
 });
@@ -54,7 +58,7 @@ class PostWave extends Component {
 			<Card className={classes.card}>
 				<Avatar
 					alt='Remy Sharp'
-					src={imageUrl}
+					src={imageUrl ? imageUrl : NoImg}
 					className={classes.cardAvatar}
 				/>
 				<CardContent className={classes.postWave}>

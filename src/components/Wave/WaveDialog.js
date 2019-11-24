@@ -99,23 +99,23 @@ class WaveDialog extends Component {
 						<Chat>Comments</Chat>
 					</IconButton>
 				) : (
-					<IconButton
-						component={Link}
-						to='/login'
-						className={classes.commentButton}
-					>
-						<Chat>Comments</Chat>
-					</IconButton>
-				)
+						<IconButton
+							component={Link}
+							to='/login'
+							className={classes.commentButton}
+						>
+							<Chat>Comments</Chat>
+						</IconButton>
+					)
 			) : (
-				<TipIconButton
-					onClick={this.handleOpen}
-					tip='Expand wave'
-					tipClassName={classes.expandButton}
-				>
-					<UnfoldMore />
-				</TipIconButton>
-			);
+					<TipIconButton
+						onClick={this.handleOpen}
+						tip='Expand wave'
+						tipClassName={classes.expandButton}
+					>
+						<UnfoldMore />
+					</TipIconButton>
+				);
 
 		const commentButton = !authenticated ? (
 			<IconButton
@@ -126,64 +126,65 @@ class WaveDialog extends Component {
 				<Chat />
 			</IconButton>
 		) : (
-			<Fragment>
-				<IconButton
-					onClick={this.handleCommentClick}
-					className={classes.expandButton}
-				>
-					<Chat className={classes.commentButton} />
-				</IconButton>
-			</Fragment>
-		);
+				<Fragment>
+					<IconButton
+						onClick={this.handleCommentClick}
+						className={classes.expandButton}
+					>
+						<Chat className={classes.commentButton} />
+					</IconButton>
+				</Fragment>
+			);
 
 		const dialogMarkup = loading ? (
 			<CircularProgress className={classes.progress} size={100} />
 		) : (
-			<Grid container spacing={2}>
-				<Grid item sm={3}>
-					<Avatar
-						alt=''
-						src={userImage ? userImage : <CircularProgress size={30} />}
-						className={classes.cardAvatar}
-					/>
+				<Grid container spacing={2} alignContent={'center'}>
+					<Grid container spacing={2} alignContent={'center'} className={classes.wavePopup}>
+						<Grid item sm={3}>
+							<Avatar
+								alt=''
+								src={userImage ? userImage : <CircularProgress size={30} />}
+								className={classes.cardAvatar}
+							/>
+						</Grid>
+						<Grid item sm={9}>
+							<Typography
+								variant='h6'
+								color='textPrimary'
+								fontWeight='fontWeightBold'
+							>
+								{userName}{' '}
+								<MuiLink
+									component={Link}
+									to={`/users/${userHandle}`}
+									color='textPrimary'
+									variant='subtitle1'
+								>
+									@{userHandle}
+								</MuiLink>
+								<FormattedDate createdAt={createdAt} />
+							</Typography>
+							<hr className={classes.invisibleSeparator} />
+							<Typography variant='body1' className={classes.cardBody}>
+								{body}
+							</Typography>
+							<hr className={classes.invisibleSeparator} />
+							<div className={classes.buttonsContainer}>
+								<div className={classes.waveButtons}>
+									<FavoriteButton waveId={waveId} />
+									{upvoteCount}
+								</div>
+								<div className={classes.waveButtons}>
+									{commentButton} {commentCount}
+								</div>
+							</div>
+						</Grid>
+					</Grid>
+					{this.state.commentBox && <CommentForm waveId={waveId} />}
+					<Comments comments={comments} />
 				</Grid>
-				<Grid item sm={9}>
-					<Typography
-						variant='h6'
-						color='textPrimary'
-						fontWeight='fontWeightBold'
-					>
-						{userName}{' '}
-						<MuiLink
-							component={Link}
-							to={`/users/${userHandle}`}
-							color='textPrimary'
-							variant='subtitle1'
-						>
-							@{userHandle}
-						</MuiLink>
-						<FormattedDate createdAt={createdAt} />
-					</Typography>
-					<hr className={classes.invisibleSeparator} />
-					<Typography variant='body1' className={classes.cardBody}>
-						{body}
-					</Typography>
-					<hr className={classes.invisibleSeparator} />
-					<div className={classes.buttonsContainer}>
-						<div className={classes.waveButtons}>
-							<FavoriteButton waveId={waveId} />
-							{upvoteCount}
-						</div>
-						<div className={classes.waveButtons}>
-							{commentButton} {commentCount}
-						</div>
-					</div>
-				</Grid>
-				<hr className={classes.invisibleSeparator} />
-				{this.state.commentBox && <CommentForm waveId={waveId} />}
-				<Comments comments={comments} />
-			</Grid>
-		);
+			);
 		return (
 			<Fragment>
 				{iconButton}

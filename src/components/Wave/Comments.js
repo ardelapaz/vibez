@@ -15,6 +15,7 @@ const styles = (theme) => ({
 class Comments extends Component {
 	render() {
 		const { classes, comments } = this.props;
+
 		return (
 			<Grid container>
 				{comments.map((comment, index) => {
@@ -35,24 +36,25 @@ class Comments extends Component {
 										/>
 									</Grid>
 									<Grid item sm={10}>
-										<div>
-											<Typography
-												variant='h5'
-												component={Link}
-												to={`/users/${userHandle}`}
-												color='textPrimary'
-											>
-												{userHandle}
-											</Typography>
-											<FormattedDate createdAt={createdAt} />
-											<hr className={classes.invisibleSeparator} />
-											<Typography variant='body1'>{body}</Typography>
-										</div>
+										<Typography
+											variant='h6'
+											component={Link}
+											to={`/users/${userHandle}`}
+											color='textPrimary'
+										>
+											@{userHandle}
+										</Typography>
+										<FormattedDate createdAt={createdAt} />
+										<hr className={classes.invisibleSeparator} />
+										<Typography variant='body1'>{body}</Typography>
 									</Grid>
 								</Grid>
 							</Grid>
-							{index === comments.length - 1 && (
+							{index === comments.length && (
 								<hr className={classes.visibleSeparator} />
+							)}
+							{index === comments.length - 1 && (
+								<hr className={classes.invisibleSeparator} />
 							)}
 						</Fragment>
 					);

@@ -135,7 +135,7 @@ export default {
 		},
 		cardAvatar: {
 			marginLeft: '20px',
-			marginTop: '30px',
+			marginTop: '2%',
 			height: 60,
 			width: 60
 		},
@@ -146,6 +146,9 @@ export default {
 		expandedWaveContent: {
 			minHeight: 300
 		},
+		wavePopup: {
+			marginTop: 20
+		},
 		// Delete Wave
 		deleteButton: {
 			color: 'primary',
@@ -155,6 +158,13 @@ export default {
 			padding: 10,
 			'&:hover': {
 				color: 'red'
+			}
+		},
+
+		cancel: {
+			'&:hover': {
+				backgroundColor: 'red',
+				color: 'white'
 			}
 		},
 
@@ -229,7 +239,7 @@ export default {
 		visibleSeparator: {
 			width: '100%',
 			borderBottom: '1px solid rgba(0,0,0,0.1)',
-			marginBottom: 20
+			marginBottom: 10
 		},
 		fullLine: {
 			height: 15,
