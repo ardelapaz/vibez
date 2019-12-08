@@ -12,8 +12,21 @@ import { connect } from 'react-redux';
 import { getWaves } from '../redux/actions/dataActions';
 
 class home extends Component {
-	componentDidMount() {
-		this.props.getWaves();
+	constructor(props) {
+		super(props);
+		this.state = {
+			user: {}
+		}
+	}
+	componentDidUpdate(prevProps) {
+		if (prevProps.user.credentials !== this.props.user.credentials) {
+			var genres = this.props.user.credentials.followedGenres;
+			if (genres) {
+				genres.map(genre => {
+					this.props.getWaves(genre);
+				});
+			}
+		}
 	}
 	render() {
 		const { waves, loading } = this.props.data;
@@ -21,8 +34,8 @@ class home extends Component {
 		let recentWavesMarkup = !loading ? (
 			waves.map((wave) => <Wave key={wave.waveId} wave={wave} />)
 		) : (
-			<WaveSkeleton />
-		);
+				<WaveSkeleton />
+			);
 		return (
 			<div className='container'>
 				<Grid container spacing={5}>

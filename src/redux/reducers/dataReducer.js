@@ -15,7 +15,7 @@ const initialState = {
 	loading: false
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
 	switch (action.type) {
 		case LOADING_DATA:
 			return {
@@ -25,7 +25,7 @@ export default function(state = initialState, action) {
 		case SET_WAVES:
 			return {
 				...state,
-				waves: action.payload,
+				waves: state.waves.length > 0 ? [...state.waves, ...action.payload] : action.payload,
 				loading: false
 			};
 		case SET_WAVE:

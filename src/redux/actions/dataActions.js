@@ -15,14 +15,16 @@ import {
 import axios from 'axios';
 
 const baseUrl = "https://us-central1-vibe-32481.cloudfunctions.net/api";
+const testUrl = "http://localhost:5000/vibe-32481/us-central1/api";
+
 
 
 // Get all waves
 
-export const getWaves = () => (dispatch) => {
+export const getWaves = (category) => (dispatch) => {
 	dispatch({ type: LOADING_DATA });
 	return axios
-		.get(`${baseUrl}/waves`)
+		.get(`${testUrl}/${category}/waves`)
 		.then((res) => {
 			dispatch({ type: SET_WAVES, payload: res.data });
 		})
